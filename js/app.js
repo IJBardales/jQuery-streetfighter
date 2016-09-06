@@ -1,7 +1,9 @@
 
 $(document).ready(function() {
+	userGuide();
   $('.ryu').mouseenter(function() {
     $('.ryu-still').hide();
+    $('.ryu-cool').hide();
     $('.ryu-ready').show();
   })
   .mouseleave(function() {
@@ -9,10 +11,10 @@ $(document).ready(function() {
   	$('.ryu-still').show();
   })
   .mousedown(function() {
-  	// play hadouken sound
+  	playHadouken();
   	$('.ryu-ready').hide();
   	$('.ryu-throwing').show();
-  	$('.hadouken').show().animate(
+  	$('.hadouken').finish().show().animate(
   		{'left': '1020px'},
   		500,
   		function() {
@@ -21,10 +23,29 @@ $(document).ready(function() {
   		});
 
   	})
-  	
-  .mouseup(function(){
+  .mouseup(function() {
   	//ryu goes back to his ready position
   	$('.ryu-throwing').hide();
   	$('.ryu-ready').show();
+  })
+  $(document).keydown(function(e){
+  	if (e.keyCode == 88) {
+  		$('.ryu-ready').hide();
+  		$('.ryu-kool').show();
+  	}	
   });
 });
+
+
+function playHadouken() {
+		$('#hadouken-sound')[0].volume=0.5;
+		$('#hadouken-sound')[0].load();
+		$('#hadouken-sound')[0].play();
+	}
+
+function userGuide() {
+	$('.fighter').fadeIn(900);
+	$('.warmup').fadeIn(10000);
+	$('.weapon').fadeIn(20000);
+	$('.pose').fadeIn(25000);
+}
